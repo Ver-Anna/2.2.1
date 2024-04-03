@@ -49,20 +49,6 @@ public class AppConfig {
       factoryBean.setAnnotatedClasses(User.class, Car.class);
       return factoryBean;
    }
-//   @Bean
-//   public LocalSessionFactoryBean getSessionFactoryCar() {
-//      LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-//      factoryBean.setDataSource(getDataSource());
-//
-//      Properties properties = new Properties();
-//      properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-//      properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-//
-//      factoryBean.setHibernateProperties(properties);
-//      factoryBean.setAnnotatedClasses(Car.class);
-//      return factoryBean;
-//
-//   }
 
    @Bean
    public HibernateTransactionManager getTransactionManager() {
