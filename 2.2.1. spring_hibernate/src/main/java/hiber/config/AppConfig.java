@@ -1,5 +1,6 @@
 package hiber.config;
 
+import hiber.model.Car;
 import hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,12 +43,26 @@ public class AppConfig {
       
       Properties props=new Properties();
       props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-      props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+      props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));//hibernate.hbm2ddl.auto=create-drop
 
       factoryBean.setHibernateProperties(props);
-      factoryBean.setAnnotatedClasses(User.class);
+      factoryBean.setAnnotatedClasses(User.class, Car.class);
       return factoryBean;
    }
+//   @Bean
+//   public LocalSessionFactoryBean getSessionFactoryCar() {
+//      LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+//      factoryBean.setDataSource(getDataSource());
+//
+//      Properties properties = new Properties();
+//      properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+//      properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+//
+//      factoryBean.setHibernateProperties(properties);
+//      factoryBean.setAnnotatedClasses(Car.class);
+//      return factoryBean;
+//
+//   }
 
    @Bean
    public HibernateTransactionManager getTransactionManager() {
@@ -55,4 +70,5 @@ public class AppConfig {
       transactionManager.setSessionFactory(getSessionFactory().getObject());
       return transactionManager;
    }
+
 }
